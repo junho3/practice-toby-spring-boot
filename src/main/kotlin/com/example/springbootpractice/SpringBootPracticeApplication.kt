@@ -1,11 +1,11 @@
 package com.example.springbootpractice
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 
-@SpringBootApplication
 class SpringBootPracticeApplication
 
 fun main(args: Array<String>) {
-    runApplication<SpringBootPracticeApplication>(*args)
+    val serverFactory = TomcatServletWebServerFactory()
+    val webServer = serverFactory.getWebServer()
+    webServer.start()
 }
