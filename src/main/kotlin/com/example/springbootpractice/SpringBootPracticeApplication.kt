@@ -19,9 +19,11 @@ fun main(args: Array<String>) {
                 "hello",
                 object : HttpServlet() {
                     override fun service(req: HttpServletRequest, resp: HttpServletResponse) {
+                        val name = req.getParameter("name")
+
                         resp.status = HttpStatus.OK.value()
                         resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
-                        resp.writer.println("Hello Servlet")
+                        resp.writer.println("Hello $name")
                     }
                 }
             ).addMapping("/hello")
