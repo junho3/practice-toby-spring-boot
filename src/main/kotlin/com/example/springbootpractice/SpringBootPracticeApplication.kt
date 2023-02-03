@@ -16,6 +16,7 @@ class SpringBootPracticeApplication
 fun main(args: Array<String>) {
     val applicationContext = GenericApplicationContext().apply {
         registerBean<HelloController>()
+        registerBean<SimpleHelloService>()
         refresh()
     }
 

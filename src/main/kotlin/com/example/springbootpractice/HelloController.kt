@@ -1,8 +1,7 @@
 package com.example.springbootpractice
 
-class HelloController {
+class HelloController(private val helloService: HelloService) {
     fun hello(name: String?): String {
-        val helloService = SimpleHelloService()
         return helloService.sayHello(requireNotNull(name))
     }
 }
