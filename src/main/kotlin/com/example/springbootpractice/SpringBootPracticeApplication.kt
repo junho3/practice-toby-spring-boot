@@ -16,6 +16,8 @@ fun main(args: Array<String>) {
     val serverFactory = TomcatServletWebServerFactory()
     val webServer = serverFactory.getWebServer(
         ServletContextInitializer { servletContext ->
+            val helloController = HelloController()
+
             servletContext.addServlet(
                 "frontcontroller",
                 object : HttpServlet() {
@@ -23,9 +25,11 @@ fun main(args: Array<String>) {
                         if (req.requestURI.equals("/hello") && req.method.equals(HttpMethod.GET.name)) {
                             val name = req.getParameter("name")
 
+                            val result = helloController.hello(name)
+
                             resp.status = HttpStatus.OK.value()
                             resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
-                            resp.writer.println("Hello $name")
+                            resp.writer.println(result)
                         } else if (req.requestURI.equals("/user")) {
                             //
                         } else {
