@@ -3,6 +3,7 @@ package com.example.springbootpractice
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.servlet.ServletContextInitializer
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import javax.servlet.http.HttpServlet
@@ -16,17 +17,23 @@ fun main(args: Array<String>) {
     val webServer = serverFactory.getWebServer(
         ServletContextInitializer { servletContext ->
             servletContext.addServlet(
-                "hello",
+                "frontcontroller",
                 object : HttpServlet() {
                     override fun service(req: HttpServletRequest, resp: HttpServletResponse) {
-                        val name = req.getParameter("name")
+                        if (req.requestURI.equals("/hello") && req.method.equals(HttpMethod.GET.name)) {
+                            val name = req.getParameter("name")
 
-                        resp.status = HttpStatus.OK.value()
-                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
-                        resp.writer.println("Hello $name")
+                            resp.status = HttpStatus.OK.value()
+                            resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE)
+                            resp.writer.println("Hello $name")
+                        } else if (req.requestURI.equals("/user")) {
+                            //
+                        } else {
+                            resp.status = HttpStatus.NOT_FOUND.value()
+                        }
                     }
                 }
-            ).addMapping("/hello")
+            ).addMapping("/*")
         }
     )
 
