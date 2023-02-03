@@ -27,7 +27,7 @@ fun main(args: Array<String>) {
                 object : HttpServlet() {
                     override fun service(req: HttpServletRequest, resp: HttpServletResponse) {
                         if (req.requestURI.equals("/hello") && req.method.equals(HttpMethod.GET.name)) {
-                            val name = req.getParameter("name")
+                            val name: String? = req.getParameter("name")
 
                             val helloController = applicationContext.getBean(HelloController::class.java)
                             val result = helloController.hello(name)
