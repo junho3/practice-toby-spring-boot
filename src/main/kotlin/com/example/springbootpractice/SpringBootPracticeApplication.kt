@@ -3,6 +3,7 @@ package com.example.springbootpractice
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.servlet.ServletContextInitializer
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext
@@ -13,6 +14,16 @@ import javax.servlet.ServletContext
 @Configuration
 class SpringBootPracticeApplication
 
+@Bean
+fun servletWebServerFactory(): ServletWebServerFactory {
+    return TomcatServletWebServerFactory()
+}
+
+@Bean
+fun dispatcherServlet(): DispatcherServlet {
+    return DispatcherServlet()
+}
+
 fun main(args: Array<String>) {
     val applicationContext: AnnotationConfigWebApplicationContext = object : AnnotationConfigWebApplicationContext() {
         override fun setClassLoader(classLoader: ClassLoader) {
@@ -22,12 +33,15 @@ fun main(args: Array<String>) {
 
         override fun onRefresh() {
             super.onRefresh()
-            val serverFactory: ServletWebServerFactory = TomcatServletWebServerFactory()
+            val serverFactory: ServletWebServerFactory = getBean(ServletWebServerFactory::class.java)
+            val dispatcherServlet: DispatcherServlet = getBean(DispatcherServlet::class.java)
+            dispatcherServlet.setApplicationContext(this)
+
             val webServer = serverFactory.getWebServer(
                 ServletContextInitializer { servletContext: ServletContext ->
                     servletContext.addServlet(
                         "dispatcherServlet",
-                        DispatcherServlet(this)
+                        dispatcherServlet
                     )
                         .addMapping("/*")
                 }
