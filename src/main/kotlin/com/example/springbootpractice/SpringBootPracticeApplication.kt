@@ -25,10 +25,10 @@ fun dispatcherServlet(): DispatcherServlet {
 }
 
 fun main(args: Array<String>) {
-    run(SpringBootPracticeApplication::class.java)
+    run(SpringBootPracticeApplication::class.java, *args)
 }
 
-fun run(applicationClass: Class<*>) {
+fun run(applicationClass: Class<*>, vararg args: String) {
     val applicationContext: AnnotationConfigWebApplicationContext = object : AnnotationConfigWebApplicationContext() {
         override fun setClassLoader(classLoader: ClassLoader) {
             // TODO Accidental override: The following declarations have the same JVM signature 발생 해결방법을 찾지 못 함
