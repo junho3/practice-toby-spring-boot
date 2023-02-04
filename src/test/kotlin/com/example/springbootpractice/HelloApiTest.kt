@@ -19,7 +19,7 @@ class HelloApiTest {
 
         assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
         assertThat(response.headers.getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE)
-        assertThat(response.body).isEqualTo("Hello $parameter")
+        assertThat(response.body).isEqualTo("*Hello ${parameter}*")
     }
 
     @Test
