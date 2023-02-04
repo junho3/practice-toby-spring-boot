@@ -21,4 +21,14 @@ class HelloApiTest {
         assertThat(response.headers.getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE)
         assertThat(response.body).isEqualTo("Hello $parameter")
     }
+
+    @Test
+    fun failsHelloApi() {
+        val restTemplate = TestRestTemplate()
+
+        val response: ResponseEntity<String> =
+            restTemplate.getForEntity("http://localhost:8080/hello?name=", String::class.java)
+
+        assertThat(response.statusCode).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR)
+    }
 }
