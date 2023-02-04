@@ -17,4 +17,17 @@ class HelloControllerTest {
 
         Assertions.assertThat(result).isEqualTo(name)
     }
+
+    @Test
+    fun failsHelloController() {
+        val helloController = HelloController(object : HelloService {
+            override fun sayHello(name: String): String {
+                return name
+            }
+        })
+
+        Assertions.assertThatThrownBy {
+            helloController.hello(null)
+        }.isInstanceOf(IllegalArgumentException::class.java)
+    }
 }
