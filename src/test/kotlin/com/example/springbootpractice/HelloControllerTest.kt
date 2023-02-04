@@ -29,5 +29,9 @@ class HelloControllerTest {
         Assertions.assertThatThrownBy {
             helloController.hello(null)
         }.isInstanceOf(IllegalArgumentException::class.java)
+
+        Assertions.assertThatThrownBy {
+            helloController.hello("      ")
+        }.isInstanceOf(IllegalArgumentException::class.java)
     }
 }
