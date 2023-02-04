@@ -3,8 +3,18 @@ package com.example.springbootpractice
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
+@Retention(AnnotationRetention.RUNTIME)
+@Target(AnnotationTarget.FUNCTION)
+@UnitTest
+annotation class FastUnitTest
+
+@Retention(AnnotationRetention.RUNTIME)
+@Target(AnnotationTarget.FUNCTION, AnnotationTarget.ANNOTATION_CLASS)
+@Test
+annotation class UnitTest
+
 class HelloServiceTest {
-    @Test
+    @UnitTest
     fun simpleHelloService() {
         val helloService = SimpleHelloService()
         val name = "Test"
@@ -13,7 +23,7 @@ class HelloServiceTest {
 
         Assertions.assertThat(result).isEqualTo("Hello $name")
     }
-    @Test
+    @FastUnitTest
     fun helloDecorator() {
         val helloDecorator = HelloDecorator(object : HelloService {
             override fun sayHello(name: String): String {
