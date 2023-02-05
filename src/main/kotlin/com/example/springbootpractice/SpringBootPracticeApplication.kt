@@ -7,17 +7,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.web.servlet.DispatcherServlet
 
 @MySpringBootAnnotation
-class SpringBootPracticeApplication {
-    @Bean
-    fun servletWebServerFactory(): ServletWebServerFactory {
-        return TomcatServletWebServerFactory()
-    }
-
-    @Bean
-    fun dispatcherServlet(): DispatcherServlet {
-        return DispatcherServlet()
-    }
-}
+class SpringBootPracticeApplication
 
 fun main(args: Array<String>) {
     SpringApplication.run(SpringBootPracticeApplication::class.java, *args)
