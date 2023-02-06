@@ -1,18 +1,11 @@
 package com.example.config
 
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
-import org.springframework.boot.web.servlet.server.ServletWebServerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.DispatcherServlet
 
 @Configuration
-class Config {
-    @Bean
-    fun servletWebServerFactory(): ServletWebServerFactory {
-        return TomcatServletWebServerFactory()
-    }
-
+class DispatcherServletConfig {
     @Bean
     fun dispatcherServlet(): DispatcherServlet {
         return DispatcherServlet()
