@@ -1,5 +1,6 @@
 package com.example.springbootpractice
 
+import com.example.config.MySpringBootApplication
 import org.springframework.boot.SpringApplication
 
 @MySpringBootApplication

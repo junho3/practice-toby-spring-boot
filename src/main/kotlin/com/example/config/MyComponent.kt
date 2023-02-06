@@ -1,4 +1,4 @@
-package com.example.springbootpractice
+package com.example.config
 
 import org.springframework.context.annotation.Import
 import org.springframework.stereotype.Component

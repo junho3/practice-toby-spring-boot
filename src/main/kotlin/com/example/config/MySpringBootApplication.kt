@@ -1,4 +1,4 @@
-package com.example.springbootpractice
+package com.example.config
 
 import com.example.config.EnableAutoConfiguration
 import org.springframework.context.annotation.ComponentScan
