@@ -1,4 +1,4 @@
-package com.example.springbootpractice
+package com.example.config
 
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory
