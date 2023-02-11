@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Condition
 import org.springframework.context.annotation.ConditionContext
 import org.springframework.context.annotation.Conditional
 import org.springframework.core.type.AnnotatedTypeMetadata
+import org.springframework.util.ClassUtils
 
 
 @MyAutoConfiguration
@@ -20,7 +21,7 @@ class JettyWebServerConfig {
 
     class JettyCondition : Condition {
         override fun matches(context: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {
-            return true
+            return ClassUtils.isPresent("org.eclipse.jetty.server.Server", context.classLoader)
         }
     }
 }
