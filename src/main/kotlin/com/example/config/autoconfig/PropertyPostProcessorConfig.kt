@@ -17,7 +17,7 @@ class PropertyPostProcessorConfig {
                 val annotation = AnnotationUtils.findAnnotation(bean.javaClass, MyConfigurationProperties::class.java)
                     ?: return bean
 
-                val attributes = AnnotationUtils.getAnnotationAttributes(annotation)
+                val attributes: Map<String, Any> = AnnotationUtils.getAnnotationAttributes(annotation)
                 val prefix: String = attributes["prefix"].toString()
 
                 return Binder.get(env).bindOrCreate(prefix, bean.javaClass)
