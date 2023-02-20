@@ -1,8 +1,8 @@
 package com.example.config.autoconfig
 
-import org.springframework.stereotype.Component
+import com.example.config.MyConfigurationProperties
 
-@Component
+@MyConfigurationProperties
 class ServerProperties(
     val contextPath: String,
     val port: Int
