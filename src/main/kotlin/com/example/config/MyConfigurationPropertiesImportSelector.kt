@@ -7,8 +7,7 @@ class MyConfigurationPropertiesImportSelector : DeferredImportSelector {
     override fun selectImports(importingClassMetadata: AnnotationMetadata): Array<String> {
         val attributes = importingClassMetadata
             .getAllAnnotationAttributes(EnableMyConfigurationProperties::class.java.name)
-        val propertyClass = attributes?.getFirst("value")
-
-        return arrayOf(propertyClass!!.javaClass.name)
+        val propertyClass = attributes?.getFirst("value") as Class<*>
+        return arrayOf(propertyClass.name)
     }
 }
