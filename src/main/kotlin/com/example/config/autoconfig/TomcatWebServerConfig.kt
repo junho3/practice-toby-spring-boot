@@ -15,21 +15,11 @@ import org.springframework.core.env.Environment
 class TomcatWebServerConfig {
     @Bean("tomcatWebServerFactory")
     @ConditionalOnMissingBean
-    fun servletWebServerFactory(serverProperties: ServerProperties): ServletWebServerFactory {
+    fun servletWebServerFactory(properties: ServerProperties): ServletWebServerFactory {
         val factory = TomcatServletWebServerFactory()
-        factory.contextPath = serverProperties.contextPath
-        factory.port = serverProperties.port
+        factory.contextPath = properties.contextPath
+        factory.port = properties.port
 
         return factory
-    }
-
-    @Bean
-    fun serverProperties(environment: Environment) : ServerProperties {
-        val properties = ServerProperties(
-            contextPath = environment.getProperty("contextPath").orEmpty(),
-            port = environment.getProperty("port").orEmpty().toInt(),
-        )
-
-        return properties
     }
 }
