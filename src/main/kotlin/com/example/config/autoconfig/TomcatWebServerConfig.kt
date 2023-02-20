@@ -11,15 +11,18 @@ import org.springframework.context.annotation.Bean
 
 @MyAutoConfiguration
 @ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
-class TomcatWebServerConfig {
-    @Value("\${contextPath}")
-    lateinit var contextPath: String
-
+class TomcatWebServerConfig(
+    @Value("\${contextPath:}")
+    val contextPath: String,
+    @Value("\${port:8080}")
+    val port: Int
+) {
     @Bean("tomcatWebServerFactory")
     @ConditionalOnMissingBean
     fun servletWebServerFactory(): ServletWebServerFactory {
         val factory = TomcatServletWebServerFactory()
         factory.contextPath = contextPath
+        factory.port = port
 
         return factory
     }
