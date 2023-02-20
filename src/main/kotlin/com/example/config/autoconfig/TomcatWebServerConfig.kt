@@ -7,23 +7,29 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory
 import org.springframework.context.annotation.Bean
+import org.springframework.core.env.Environment
 
 
 @MyAutoConfiguration
 @ConditionalMyOnClass("org.apache.catalina.startup.Tomcat")
-class TomcatWebServerConfig(
-    @Value("\${contextPath:}")
-    val contextPath: String,
-    @Value("\${port:8080}")
-    val port: Int
-) {
+class TomcatWebServerConfig {
     @Bean("tomcatWebServerFactory")
     @ConditionalOnMissingBean
-    fun servletWebServerFactory(): ServletWebServerFactory {
+    fun servletWebServerFactory(serverProperties: ServerProperties): ServletWebServerFactory {
         val factory = TomcatServletWebServerFactory()
-        factory.contextPath = contextPath
-        factory.port = port
+        factory.contextPath = serverProperties.contextPath
+        factory.port = serverProperties.port
 
         return factory
+    }
+
+    @Bean
+    fun serverProperties(environment: Environment) : ServerProperties {
+        val properties = ServerProperties(
+            contextPath = environment.getProperty("contextPath").orEmpty(),
+            port = environment.getProperty("port").orEmpty().toInt(),
+        )
+
+        return properties
     }
 }
