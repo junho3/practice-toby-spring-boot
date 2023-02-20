@@ -14,9 +14,13 @@ class PropertyPostProcessorConfig {
     fun propertyPostProcessor(env: Environment): BeanPostProcessor {
         return object : BeanPostProcessor {
             override fun postProcessAfterInitialization(bean: Any, beanName: String): Any? {
-                AnnotationUtils.findAnnotation(bean.javaClass, MyConfigurationProperties::class.java) ?: return bean
+                val annotation = AnnotationUtils.findAnnotation(bean.javaClass, MyConfigurationProperties::class.java)
+                    ?: return bean
 
-                return Binder.get(env).bindOrCreate("", bean.javaClass)
+                val attributes = AnnotationUtils.getAnnotationAttributes(annotation)
+                val prefix: String = attributes["prefix"].toString()
+
+                return Binder.get(env).bindOrCreate(prefix, bean.javaClass)
             }
         }
     }
