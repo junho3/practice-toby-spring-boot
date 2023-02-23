@@ -91,5 +91,5 @@ class ConfigurationTest {
             get() = common
     }
 
-    internal class Common()
+    internal class Common
 }

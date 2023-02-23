@@ -12,4 +12,4 @@ import org.springframework.transaction.annotation.Transactional
 @ContextConfiguration(classes = [SpringBootPracticeApplication::class])
 @TestPropertySource("classpath:/application.properties")
 @Transactional
-annotation class IntegrationTest()
+annotation class IntegrationTest

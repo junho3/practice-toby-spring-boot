@@ -54,7 +54,7 @@ class ConditionalWithApplicationRunnerTest {
         }
     }
 
-    class MyBean {}
+    class MyBean
 
     class BooleanCondition : Condition {
         override fun matches(context: ConditionContext, metadata: AnnotatedTypeMetadata): Boolean {

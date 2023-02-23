@@ -1,6 +1,5 @@
 package com.example.config
 
-import com.example.config.EnableAutoConfiguration
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
@@ -9,4 +8,4 @@ import org.springframework.context.annotation.Configuration
 @ComponentScan
 @Configuration
 @EnableAutoConfiguration
-annotation class MySpringBootApplication()
+annotation class MySpringBootApplication
