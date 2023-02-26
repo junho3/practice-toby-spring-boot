@@ -10,10 +10,6 @@ class HelloControllerTest {
             override fun sayHello(name: String): String {
                 return name
             }
-
-            override fun countOf(name: String): Int {
-                return 0
-            }
         })
 
         val name = "Test"
@@ -27,10 +23,6 @@ class HelloControllerTest {
         val helloController = HelloController(object : HelloService {
             override fun sayHello(name: String): String {
                 return name
-            }
-
-            override fun countOf(name: String): Int {
-                return 0
             }
         })
 
