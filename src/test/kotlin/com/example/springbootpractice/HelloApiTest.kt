@@ -15,7 +15,7 @@ class HelloApiTest {
         val parameter = "Spring"
 
         val response: ResponseEntity<String> =
-            restTemplate.getForEntity("http://localhost:8080/hello?name={name}", String::class.java, parameter)
+            restTemplate.getForEntity("http://localhost:9090/app/hello?name={name}", String::class.java, parameter)
 
         assertThat(response.statusCode).isEqualTo(HttpStatus.OK)
         assertThat(response.headers.getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE)
@@ -27,7 +27,7 @@ class HelloApiTest {
         val restTemplate = TestRestTemplate()
 
         val response: ResponseEntity<String> =
-            restTemplate.getForEntity("http://localhost:8080/hello?name=", String::class.java)
+            restTemplate.getForEntity("http://localhost:9090/app/hello?name=", String::class.java)
 
         assertThat(response.statusCode).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR)
     }
