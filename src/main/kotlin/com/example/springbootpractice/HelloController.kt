@@ -13,9 +13,7 @@ class HelloController(
      */
     @GetMapping("/hello")
     fun hello(name: String?): String {
-        if (name.isNullOrBlank()) {
-            throw IllegalArgumentException()
-        }
+        requireNotNull(name)
 
         return helloService.sayHello(name)
     }
