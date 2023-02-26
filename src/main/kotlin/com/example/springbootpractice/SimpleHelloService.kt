@@ -11,4 +11,8 @@ class SimpleHelloService(
 
         return "Hello $name"
     }
+
+    override fun countOf(name: String): Int {
+        return helloRepository.countOf(name)
+    }
 }
