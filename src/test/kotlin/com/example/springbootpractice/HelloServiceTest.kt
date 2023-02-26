@@ -1,17 +1,6 @@
 package com.example.springbootpractice
 
 import org.assertj.core.api.Assertions
-import org.junit.jupiter.api.Test
-
-@Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.FUNCTION)
-@UnitTest
-annotation class FastUnitTest
-
-@Retention(AnnotationRetention.RUNTIME)
-@Target(AnnotationTarget.FUNCTION, AnnotationTarget.ANNOTATION_CLASS)
-@Test
-annotation class UnitTest
 
 class HelloServiceTest {
     @UnitTest
