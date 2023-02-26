@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions
 class HelloServiceTest {
     @UnitTest
     fun simpleHelloService() {
-        val helloService = SimpleHelloService()
+        val helloService = SimpleHelloService(createHelloRepository())
         val name = "Test"
 
         val result = helloService.sayHello(name)
@@ -24,5 +24,15 @@ class HelloServiceTest {
         val result = helloDecorator.sayHello(name)
 
         Assertions.assertThat(result).isEqualTo("*${name}*")
+    }
+
+    private fun createHelloRepository(): HelloRepository {
+        return object : HelloRepository {
+            override fun findByName(name: String): Hello? {
+                return null
+            }
+
+            override fun increaseCount(name: String) {}
+        }
     }
 }

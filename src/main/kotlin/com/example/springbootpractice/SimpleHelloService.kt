@@ -3,8 +3,12 @@ package com.example.springbootpractice
 import org.springframework.stereotype.Service
 
 @Service
-class SimpleHelloService : HelloService {
+class SimpleHelloService(
+    private val helloRepository: HelloRepository
+) : HelloService {
     override fun sayHello(name: String): String {
+        helloRepository.increaseCount(name)
+
         return "Hello $name"
     }
 }
