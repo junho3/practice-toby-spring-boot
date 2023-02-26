@@ -7,5 +7,5 @@ import org.springframework.context.annotation.Configuration
 @Target(AnnotationTarget.CLASS)
 @ComponentScan
 @Configuration
-@EnableAutoConfiguration
+@EnableMyAutoConfiguration
 annotation class MySpringBootApplication
