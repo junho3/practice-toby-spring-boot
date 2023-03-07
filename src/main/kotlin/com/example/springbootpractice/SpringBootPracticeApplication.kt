@@ -23,7 +23,13 @@ class SpringBootPracticeApplication {
     fun printConditionBean(report: ConditionEvaluationReport): ApplicationRunner {
         return ApplicationRunner {
             report.conditionAndOutcomesBySource.entries.filter { it.value.isFullMatch }
-                .forEach { println(it.key) }
+                .forEach { condition ->
+                    println(condition.key)
+                    condition.value.forEach {
+                        println("\t ${it.outcome}")
+                    }
+                    println()
+                }
         }
     }
 }
