@@ -3,6 +3,7 @@ package com.example.springbootpractice
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.condition.ConditionEvaluationReport
 import org.springframework.context.annotation.Bean
 import org.springframework.core.env.Environment
 import org.springframework.jdbc.core.JdbcTemplate
@@ -15,6 +16,14 @@ class SpringBootPracticeApplication {
         return ApplicationRunner {
             val name = env.getProperty("my.name")
             println("name : $name")
+        }
+    }
+
+    @Bean
+    fun printConditionBean(report: ConditionEvaluationReport): ApplicationRunner {
+        return ApplicationRunner {
+            report.conditionAndOutcomesBySource.entries.filter { it.value.isFullMatch }
+                .forEach { println(it.key) }
         }
     }
 }
