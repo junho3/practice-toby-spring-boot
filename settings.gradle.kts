@@ -5,4 +5,4 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = "spring-boot-practice"
+rootProject.name = "toby-spring-boot-practice"
